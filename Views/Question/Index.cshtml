@@ -1,0 +1,56 @@
+﻿@model IEnumerable<StackwIdentity.Models.Question>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
+                # of Answers
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tags)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @*Title goes here*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Id)
+            </td>
+            <td>
+                @item.Answers.Count
+            </td>
+            <td>
+                    @foreach(var tag in item.Tags)
+                    {
+                        <span>@*tag.Title*@</span>
+                    }
+            </td>
+            <td>
+                <a asp-action="Vote" asp-route-vote-value="1" asp-route-id="@item.Id">Upvote</a> |
+                <a asp-action="Vote" asp-route-vote-value"="-1">Downvote</a> |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
